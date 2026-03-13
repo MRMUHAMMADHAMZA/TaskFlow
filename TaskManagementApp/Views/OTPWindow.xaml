@@ -1,0 +1,333 @@
+﻿<Window x:Class="TaskManagementApp.Views.OTPWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TaskFlow — Verify OTP"
+        Height="600" Width="900"
+        WindowState="Maximized"
+        ResizeMode="CanResize"
+        MinHeight="500" MinWidth="700"
+        Background="#0F0E17">
+
+    <Window.Resources>
+        <Style x:Key="OTPBox" TargetType="TextBox">
+            <Setter Property="Width" Value="58"/>
+            <Setter Property="Height" Value="65"/>
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#1E1E3F"/>
+            <Setter Property="CaretBrush" Value="#6C63FF"/>
+            <Setter Property="SelectionBrush" Value="#6C63FF"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="#2A2A4A"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="MaxLength" Value="1"/>
+            <Setter Property="Cursor" Value="IBeam"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="12">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#6C63FF"/>
+                                <Setter TargetName="border" Property="Background" Value="#252550"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#4A4A8A"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.3*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ══ LEFT PANEL ══ -->
+        <Border Grid.Column="0" Background="#16213E">
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="35">
+
+                <!-- Icon -->
+                <Border Background="#6C63FF" CornerRadius="18"
+                        Width="80" Height="80"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,24">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#6C63FF" BlurRadius="25"
+                                          ShadowDepth="0" Opacity="0.5"/>
+                    </Border.Effect>
+                    <TextBlock Text="✉" FontSize="38"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Foreground="White"/>
+                </Border>
+
+                <TextBlock Text="Check your email"
+                           FontSize="24" FontWeight="Bold"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,12"/>
+
+                <TextBlock x:Name="txtEmailHint"
+                           FontSize="13" Foreground="#A7A9BE"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           Margin="0,0,0,30"/>
+
+                <!-- Info Cards -->
+                <Border Background="#1E2D5A" CornerRadius="10"
+                        Padding="16,12" Margin="0,0,0,10">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="⏱  " Foreground="#6C63FF" FontSize="14"/>
+                        <TextBlock Text="OTP expires in 5 minutes"
+                                   Foreground="#CDD0E3" FontSize="12"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#1E2D5A" CornerRadius="10"
+                        Padding="16,12" Margin="0,0,0,10">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🔒  " Foreground="#6C63FF" FontSize="14"/>
+                        <TextBlock Text="Never share your OTP with anyone"
+                                   Foreground="#CDD0E3" FontSize="12"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="#1E2D5A" CornerRadius="10"
+                        Padding="16,12">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="📧  " Foreground="#6C63FF" FontSize="14"/>
+                        <TextBlock Text="Check spam folder if not received"
+                                   Foreground="#CDD0E3" FontSize="12"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </Border>
+
+        <!-- ══ RIGHT PANEL ══ -->
+        <Border Grid.Column="1" Background="#0F0E17">
+            <StackPanel VerticalAlignment="Center" Margin="50,30">
+
+                <!-- Header -->
+                <TextBlock Text="OTP Verification"
+                           FontSize="26" FontWeight="Bold"
+                           Foreground="White" Margin="0,0,0,6"/>
+
+                <TextBlock x:Name="txtSubtitle"
+                           FontSize="13" Foreground="#A7A9BE"
+                           Margin="0,0,0,35"
+                           TextWrapping="Wrap"/>
+
+                
+
+                <!-- OTP Input Boxes Label -->
+                <TextBlock Text="ENTER 6-DIGIT CODE"
+                           Foreground="#A7A9BE"
+                           FontSize="11"
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,12"/>
+
+                <!-- ══ 6 OTP BOXES ══ -->
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            Margin="0,0,0,8">
+
+                    <TextBox x:Name="otp1"
+                             Style="{StaticResource OTPBox}"
+                             Margin="0,0,8,0"
+                             PreviewTextInput="OTPBox_PreviewTextInput"
+                             TextChanged="otp1_TextChanged"
+                             KeyDown="OTPBox_KeyDown"/>
+
+                    <TextBox x:Name="otp2"
+                             Style="{StaticResource OTPBox}"
+                             Margin="0,0,8,0"
+                             PreviewTextInput="OTPBox_PreviewTextInput"
+                             TextChanged="otp2_TextChanged"
+                             KeyDown="OTPBox_KeyDown"/>
+
+                    <TextBox x:Name="otp3"
+                             Style="{StaticResource OTPBox}"
+                             Margin="0,0,8,0"
+                             PreviewTextInput="OTPBox_PreviewTextInput"
+                             TextChanged="otp3_TextChanged"
+                             KeyDown="OTPBox_KeyDown"/>
+
+                    <!-- Middle Divider -->
+                    <TextBlock Text="—"
+                               Foreground="#A7A9BE"
+                               FontSize="20"
+                               VerticalAlignment="Center"
+                               Margin="0,0,8,0"/>
+
+                    <TextBox x:Name="otp4"
+                             Style="{StaticResource OTPBox}"
+                             Margin="0,0,8,0"
+                             PreviewTextInput="OTPBox_PreviewTextInput"
+                             TextChanged="otp4_TextChanged"
+                             KeyDown="OTPBox_KeyDown"/>
+
+                    <TextBox x:Name="otp5"
+                             Style="{StaticResource OTPBox}"
+                             Margin="0,0,8,0"
+                             PreviewTextInput="OTPBox_PreviewTextInput"
+                             TextChanged="otp5_TextChanged"
+                             KeyDown="OTPBox_KeyDown"/>
+
+                    <TextBox x:Name="otp6"
+                             Style="{StaticResource OTPBox}"
+                             PreviewTextInput="OTPBox_PreviewTextInput"
+                             TextChanged="otp6_TextChanged"
+                             KeyDown="OTPBox_KeyDown"/>
+                </StackPanel>
+
+                <!-- ══ COUNTDOWN TIMER ══ -->
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,0,0,20">
+                    <TextBlock Text="Code expires in: "
+                               Foreground="#A7A9BE" FontSize="12"/>
+                    <TextBlock x:Name="txtTimer"
+                               Foreground="#FFD166"
+                               FontSize="12"
+                               FontWeight="SemiBold"/>
+                </StackPanel>
+
+                <!-- ══ ERROR BOX ══ -->
+                <Border x:Name="borderError"
+                        Background="#2A1020"
+                        BorderBrush="#FF6584"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Padding="14,10"
+                        Margin="0,0,0,15"
+                        Visibility="Collapsed">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="⚠  " Foreground="#FF6584" FontSize="13"/>
+                        <TextBlock x:Name="txtError"
+                                   Foreground="#FF6584"
+                                   FontSize="13"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- ══ SUCCESS BOX ══ -->
+                <Border x:Name="borderSuccess"
+                        Background="#0A2A1A"
+                        BorderBrush="#2CB67D"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Padding="14,10"
+                        Margin="0,0,0,15"
+                        Visibility="Collapsed">
+                    <TextBlock Text="✓  OTP verified! Redirecting to Dashboard..."
+                               Foreground="#2CB67D" FontSize="13"/>
+                </Border>
+
+                <!-- ══ VERIFY BUTTON ══ -->
+                <Button x:Name="btnVerify"
+                        Content="Verify OTP"
+                        Height="46"
+                        FontSize="15"
+                        FontWeight="SemiBold"
+                        Foreground="White"
+                        Background="#6C63FF"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Margin="0,0,0,20"
+                        Click="btnVerify_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="btnBorder"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="10">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="btnBorder"
+                                            Property="Background" Value="#5A52E0"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="btnBorder"
+                                            Property="Background" Value="#4A42D0"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="btnBorder"
+                                            Property="Background" Value="#3A3A5C"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <!-- ══ RESEND LINK ══ -->
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <TextBlock Text="Didn't receive the code?  "
+                               Foreground="#A7A9BE" FontSize="13"/>
+                    <TextBlock x:Name="lnkResend"
+                               Text="Resend OTP"
+                               Foreground="#6C63FF"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               Cursor="Hand"
+                               MouseLeftButtonDown="lnkResend_Click">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="TextDecorations" Value="Underline"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </StackPanel>
+
+                <!-- ══ BACK LINK ══ -->
+                <TextBlock x:Name="lnkBack"
+                           Text="← Back to Register"
+                           Foreground="#A7A9BE"
+                           FontSize="12"
+                           HorizontalAlignment="Center"
+                           Cursor="Hand"
+                           Margin="0,10,0,0"
+                           MouseLeftButtonDown="lnkBack_Click">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="#6C63FF"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Window>
