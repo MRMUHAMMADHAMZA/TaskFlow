@@ -1,6 +1,7 @@
 # TaskFlow 📋✅
 
-> A modern, full-featured **Task Management Desktop Application** built with WPF, C# .NET 10 and SQL Server..
+> A modern, full-featured **Task Management Desktop Application** built with WPF, C# .NET 10 and SQL Server.
+
 
 ---
 
@@ -232,11 +233,10 @@ TaskManagementApp/
 
 Software Developer
 
-[![GitHub](https://img.shields.io/badge/GitHub-YOUR_USERNAME-black?style=for-the-badge&logo=github)](https://github.com/YOUR_USERNAME)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/YOUR_USERNAME)
+[![GitHub](https://img.shields.io/badge/GitHub-MRMUHAMMADHAMZA-black?style=for-the-badge&logo=github)](https://github.com/MRMUHAMMADHAMZA)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/mrmuhammadhamza)
 
 ---
-
 
 
 <p align="center">Built with 💜 using WPF & C# .NET 10</p>
